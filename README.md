@@ -1,2 +1,3 @@
 # Organism
-A MQTT javascript service to publish/subscribe topics and messages
+
+A MQTT javascript producer/consumer to publish/subscribe topics and messages.
