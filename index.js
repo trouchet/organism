@@ -1,8 +1,9 @@
 import mqtt from 'mqtt';
 import dotenv from 'dotenv';
 
-dotenv.config()
+import { now } from './utils.js';
 
+dotenv.config()
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || '1883';
@@ -21,10 +22,10 @@ const client = mqtt.connect(connectUrl, {
 const topic = '/nodejs/mqtt'
 
 client.on('connect', () => {
-  console.log('mqtt: Connected')
+  console.log(now(), `: Connected to broker ${connectUrl}!`)
 
   client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`)
+    console.log(now(), `: Subscribe to topic '${topic}'`)
   })
 
   client.publish(topic, 
@@ -41,13 +42,13 @@ client.on('connect', () => {
 })
 
 client.on('reconnect', (error) => {
-  console.log(`Reconnecting(mqtt):`, error)
+  console.log(now(), `: Reconnecting to broker ${connectUrl}:`, error)
 })
 
 client.on('error', (error) => {
-  console.log(`Cannot connect(mqtt):`, error)
+  console.log(now(), `: Cannot connect to broker ${connectUrl}:`, error)
 })
 
 client.on('message', (topic, payload) => {
-  console.log('Received Message:', topic, payload.toString())
+  console.log(now(), ': Received Message:', topic, payload.toString())
 })
