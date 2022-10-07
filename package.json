@@ -1,0 +1,22 @@
+{
+  "name": "organism",
+  "version": "1.0.0",
+  "description": "A MQTT javascript service to publish/subscribe topics and messages",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoire/organism.git"
+  },
+  "keywords": [
+    "mqtt"
+  ],
+  "author": "brunolnetto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stoire/organism/issues"
+  },
+  "homepage": "https://github.com/stoire/organism#readme"
+}
