@@ -1,8 +1,10 @@
 import mqtt from 'mqtt';
 import dotenv from 'dotenv';
 
-import { now } from './utils.js';
+import { now_ISO, now_date, now_epoch } from './utils.js';
+import { logger, log_message } from './logger.js';
 
+const diary = logger('MQTT');
 dotenv.config()
 
 const HOST = process.env.HOST;
@@ -16,16 +18,17 @@ const client = mqtt.connect(connectUrl, {
   clean: true,	
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
-  reconnectPeriod: 1000, 			// [ms]
+  // [ms]
+  reconnectPeriod: 1000,
 })
 
 const topic = '/nodejs/mqtt'
 
 client.on('connect', () => {
-  console.log(now(), `: Connected to broker ${connectUrl}!`)
+  log_message(diary, 'info', `Connected to broker ${connectUrl}!`);
 
   client.subscribe([topic], () => {
-    console.log(now(), `: Subscribe to topic '${topic}'`)
+    log_message(diary, 'info', `Subscribe to topic '${topic}'`);
   })
 
   client.publish(topic, 
@@ -36,19 +39,20 @@ client.on('connect', () => {
   	}, 
   	(error) => {
     if (error) {
-      console.error(error)
+      log_message(diary, 'error', error)
     }
   })
 })
 
 client.on('reconnect', (error) => {
-  console.log(now(), `: Reconnecting to broker ${connectUrl}:`, error)
+  log_message(diary, 'error', `Reconnecting to broker ${connectUrl}:`+error)
 })
 
 client.on('error', (error) => {
-  console.log(now(), `: Cannot connect to broker ${connectUrl}:`, error)
+  log_message(diary, 'error', `Cannot connect to broker ${connectUrl}:`+error)
 })
 
 client.on('message', (topic, payload) => {
-  console.log(now(), ': Received Message:', topic, payload.toString())
+  log_message(diary, 'info', 'Received Message: ' + topic + payload.toString())
 })
+
