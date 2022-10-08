@@ -1,0 +1,2 @@
+2022-10-08T18:14:15.380Z [MQTT] [31merror[39m: Cannot connect to broker mqtt://broker.emqx.io:1883:Error: read ECONNRESET
+2022-10-08T18:14:16.383Z [MQTT] [31merror[39m: Reconnecting to broker mqtt://broker.emqx.io:1883:undefined
