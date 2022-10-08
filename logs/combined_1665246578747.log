@@ -1,3 +1,0 @@
-2022-10-08T16:29:39.215Z [MQTT] info: Connected to broker mqtt://broker.emqx.io:1883!
-2022-10-08T16:29:39.417Z [MQTT] info: Subscribe to topic '/nodejs/mqtt'
-2022-10-08T16:29:39.419Z [MQTT] info: Received Message: /nodejs/mqttHey Jude

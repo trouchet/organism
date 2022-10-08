@@ -1,8 +1,0 @@
-2022-10-08T16:33:39.127Z [MQTT] [32minfo[39m: Connected to broker mqtt://broker.emqx.io:1883!
-2022-10-08T16:33:39.328Z [MQTT] [32minfo[39m: Subscribe to topic '/nodejs/mqtt'
-2022-10-08T16:33:39.329Z [MQTT] [32minfo[39m: Received Message: /nodejs/mqttHey Jude
-2022-10-08T18:14:15.380Z [MQTT] [31merror[39m: Cannot connect to broker mqtt://broker.emqx.io:1883:Error: read ECONNRESET
-2022-10-08T18:14:16.383Z [MQTT] [31merror[39m: Reconnecting to broker mqtt://broker.emqx.io:1883:undefined
-2022-10-08T18:14:16.863Z [MQTT] [32minfo[39m: Connected to broker mqtt://broker.emqx.io:1883!
-2022-10-08T18:14:16.864Z [MQTT] [32minfo[39m: Subscribe to topic '/nodejs/mqtt'
-2022-10-08T18:14:17.011Z [MQTT] [32minfo[39m: Received Message: /nodejs/mqttHey Jude
