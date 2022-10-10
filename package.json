@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/stoire/organism#readme",
   "dependencies": {
+    "body-parser": "^1.20.1",
     "dot-quiver": "^5.5.1",
     "dotenv": "^16.0.3",
     "eslint-nibble": "^8.1.0",

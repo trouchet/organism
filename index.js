@@ -6,13 +6,17 @@ import path from 'path';
 import { now_ISO, now_date, now_epoch } from './utils.js';
 import { logger, log_message } from './logger.js';
 
-import { morganMiddleware } from 'quivero-api/utils/logging/logger.js';
+import { morganMiddleware, agentMorganReporter } from 'quivero-api/utils/logging/logger.js';
 
 const app = express();
 
 // [START enable_parser]
 // This middleware is available in Express v4.16.0 onwards
+// parse application/json
 app.use(express.json({ extended: true }));
+
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 // [END enable_parser]
 
 // [START logger]
@@ -25,8 +29,6 @@ const APP_PORT = process.env.PORT || 8080;
 app.listen(APP_PORT, () => {
   console.log(`Listening on port: ${APP_PORT}`);
 });
-
-const diary = logger('MQTT');
 
 dotenv.config()
 
@@ -46,23 +48,23 @@ const client = mqtt.connect(connectUrl, {
 })
 
 client.on('connect', () => {
-  log_message(diary, 'info', `Connected to broker ${connectUrl}!`);
+  log_message(agentMorganReporter, 'info', `Connected to broker ${connectUrl}!`);
 
   client.subscribe([topic], () => {
-    log_message(diary, 'info', `Subscribe to topic '${topic}'`);
+    log_message(agentMorganReporter, 'info', `Subscribe to topic '${topic}'`);
   })
 })
 
 client.on('reconnect', (error) => {
-  log_message(diary, 'error', `Reconnecting to broker ${connectUrl}:`)
+  log_message(agentMorganReporter, 'error', `Reconnecting to broker ${connectUrl}:`)
 })
 
 client.on('error', (error) => {
-  log_message(diary, 'error', `Cannot connect to broker ${connectUrl}:`+error)
+  log_message(agentMorganReporter, 'error', `Cannot connect to broker ${connectUrl}:`+error)
 })
 
 client.on('message', (topic, payload) => {
-  log_message(diary, 'info', 'Received Message: ' + topic + ' ' + payload.toString())
+  log_message(agentMorganReporter, 'info', 'Received Message: ' + topic + ' ' + payload.toString())
 })
 
 const topic = '/nodejs/mqtt'
@@ -79,14 +81,14 @@ app.get(
       }, 
       (error) => {
        if (error) {
-         log_message(diary, 'error', error)
+         log_message(agentMorganReporter, 'error', error)
        }
       }
     )
 
     let info_msg = `Message ${message} published!`;
-    log_message(diary, 'info', info_msg)
-   res.send(info_msg);
+    log_message(agentMorganReporter, 'info', info_msg)
+    res.send(info_msg);
   }
 );
 
@@ -104,21 +106,25 @@ app.get(
 app.post(
   '/submit', 
   async (req, res) => {  
-    console.log(JSON.stringify(req.body))
+    let message = String(req.body.name);
 
     client.publish(
       topic, 
-      String(req.body.name), 
+      message, 
       { 
        qos: 0, 
        retain: false 
       }, 
       (error) => {
        if (error) {
-         log_message(diary, 'error', error)
+         log_message(agentMorganReporter, 'error', error)
        }
       }
-    ) 
+    )
+
+    let info_msg = `Message ${message} published!`;
+    log_message(agentMorganReporter, 'info', info_msg)
+    res.send(info_msg);
   }
 );
 // [END add_post_handler]
