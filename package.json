@@ -30,10 +30,11 @@
   },
   "homepage": "https://github.com/stoire/organism#readme",
   "dependencies": {
-    "dot-quiver": "^6.0.1",
+    "dot-quiver": "^5.5.1",
     "dotenv": "^16.0.3",
     "eslint-nibble": "^8.1.0",
     "mqtt": "^4.3.7",
+    "quivero-api": "^6.0.4",
     "winston": "^3.8.2"
   },
   "devDependencies": {
