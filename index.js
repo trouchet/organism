@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { now_ISO, now_date, now_epoch } from './utils.js';
 import { logger, log_message } from './logger.js';
 
-import { morganMiddleware } from 'dot-quiver/utils/logging/logger.js';
+import { morganMiddleware } from 'quivero-api/utils/logging/logger.js';
 
 const app = express();
 
@@ -84,6 +84,6 @@ client.on('error', (error) => {
 })
 
 client.on('message', (topic, payload) => {
-  log_message(diary, 'info', 'Received Message: ' + topic + payload.toString())
+  log_message(diary, 'info', 'Received Message: ' + topic + ' ' + payload.toString())
 })
 
