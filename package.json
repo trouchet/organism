@@ -5,8 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "test",
-    "start": "nodemon index.js"
+    "systemd": "/home/ec2-user/.nvm/versions/node/v16.17.0/bin/node /home/ec2-user/node-app/quivero-api/src/index.js",
+    "start": "nodemon ./src/index.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll --coverage",
+    "test:ci": "jest --ci --reporters=d'efault' --reporters='./github-actions-reporter'",
+    "release": "npm publish --access public",
+    "lint": "npx eslint --fix-type .",
+    "nibble": "npx eslint-nibble .",
+    "fixable-nibble": "npx eslint-nibble --fixable-only .",
+    "update": "npm i -g npm-check-updates && ncu -u && npm update && git add . && git commit -m 'config/ package.json' && git push"
   },
   "repository": {
     "type": "git",
@@ -22,11 +30,14 @@
   },
   "homepage": "https://github.com/stoire/organism#readme",
   "dependencies": {
+    "dot-quiver": "^6.0.1",
     "dotenv": "^16.0.3",
+    "eslint-nibble": "^8.1.0",
     "mqtt": "^4.3.7",
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "jest": "^29.1.2",
     "nodemon": "^2.0.20"
   }
 }
