@@ -4,9 +4,12 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 import { now_ISO, now_date, now_epoch } from './utils.js';
-import { logger, log_message } from './logger.js';
 
-import { morganMiddleware, agentMorganReporter } from 'quivero-api/utils/logging/logger.js';
+import { 
+  morganMiddleware, 
+  agentMorganReporter,
+  log_message 
+} from 'quivero-api/utils/logging/logger.js';
 
 const app = express();
 
@@ -104,7 +107,7 @@ app.get(
 
 // [START add_post_handler]
 app.post(
-  '/submit', 
+  '/submit',
   async (req, res) => {  
     let message = String(req.body.name);
 
