@@ -8,6 +8,8 @@ import {
   statusMW,
 } from './middlewares/status.js';
 
+import helmet from "helmet";
+
 export const app = express();
 
 // [START enable_parser]
@@ -24,7 +26,7 @@ app.use(morganMiddleware);
 // [END logger]
 
 // [START logger]
-app.use(morganMiddleware);
+app.use(helmet());
 // [END logger]
 
 // Listen to the App Engine-specified port, or 8080 otherwise
