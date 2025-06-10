@@ -42,7 +42,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "jest": "^29.1.2",
+    "jest": "^30.0.0",
     "nodemon": "^3.0.0"
   }
 }
