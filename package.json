@@ -33,7 +33,7 @@
     "axios": "^1.1.2",
     "body-parser": "^2.0.0",
     "dot-quiver": "^6.0.0",
-    "dotenv": "^16.0.3",
+    "dotenv": "^18.0.0",
     "eslint-nibble": "^8.1.0",
     "helmet": "^8.0.0",
     "mqtt": "^5.0.0",
